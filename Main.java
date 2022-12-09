@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static String decode() {
+    public static String code() {
         Scanner scanner = new Scanner(System.in);
         StringBuilder input = new StringBuilder();
         StringBuilder output = new StringBuilder();
@@ -51,9 +51,38 @@ public class Main {
         }
     }
 
+    public static void decode() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        String[] array = input.split(" ");
+        StringBuilder binary = new StringBuilder();
+        StringBuilder output = new StringBuilder();
+        String digit = "a";
+
+        for (int i = 0; i < array.length; i++) {
+            if (i % 2 == 0) {
+                if (array[i].equals("00")) {
+                    digit = "0";
+                } else {
+                    digit = "1";
+                }
+            } else {
+                binary.append(digit.repeat(array[i].length()));
+            }
+        }
+
+        for (int i = 0; i < binary.length(); i += 7) {
+            int charCode = (Integer.parseInt(binary.substring(i, Math.min(binary.length(), i + 7)), 2));
+            output.append((char) charCode);
+        }
+
+        System.out.println("The result:");
+        System.out.println(output);
+    }
+
     public static void main(String[] args) {
         System.out.println("Input string: ");
 
-        unaryCode(decode());
+        decode();
     }
 }
